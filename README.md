@@ -1,68 +1,63 @@
-## QUIZ
-
-README - Student Info Program
-
-ข้อมูลผู้พัฒนา
+ข้อมูลส่วนตัว
 
 ชื่อ: นนทิวรรธน์ นนท์คำจันทร์
-
 รหัสนักศึกษา: 673450196-2
 
-Class Diagram ของโปรแกรม
+## 1. Class Diagram
 ```mermaid
-classDiagram
+tclassDiagram
     class Person {
         - ID: string
         - Name: string
         + ToString(): string
     }
-
+    
     class Student {
         - Major: string
-        - AdvisorName: string
         - GPA: double
+        - AdvisorName: string
         + ToString(): string
     }
-
+    
     class Teacher {
         - Major: string
         - advisees: List<Student>
-        + AddAdvisee(s: Student)
+        + AddAdvisee(Student)
         + GetAdvisees(): List<Student>
         + ToString(): string
     }
-
+    
     Person <|-- Student
     Person <|-- Teacher
-    Teacher "1" o-- "*" Student : advises
+    Teacher "1" -- "*" Student: advises
 ```
-หลักการเขียนโปรแกรมเชิงวัตถุ (OOP) ที่ใช้
+## 2. การใช้หลักการเขียนโปรแกรมเชิงวัตถุ (OOP)
 
-## 1. Encapsulation (การห่อหุ้มข้อมูล)
+# 1. Encapsulation (การห่อหุ้มข้อมูล)
 
-คลาส Person, Student, และ Teacher ใช้ Properties (ID, Name, Major, GPA, AdvisorName) ซึ่งช่วยควบคุมการเข้าถึงข้อมูล
+ใช้ private และ public กำหนดขอบเขตการเข้าถึงข้อมูล เช่น advisees ใน Teacher ถูกกำหนดเป็น private
 
-ใช้ private List<Student> advisees ใน Teacher เพื่อเก็บข้อมูลนักศึกษาที่อยู่ในการดูแล
+ใช้ public properties (get; set;) เพื่อควบคุมการเข้าถึงค่าภายในคลาส เช่น ID, Name, Major, GPA
 
-## 2. Inheritance (การสืบทอดคุณสมบัติ)
+# 2. Inheritance (การสืบทอดคุณสมบัติ)
 
-คลาส Student และ Teacher สืบทอด (inherit) จาก Person
+คลาส Student และ Teacher สืบทอดจาก Person ทำให้ใช้คุณสมบัติของ Person ได้ เช่น ID และ Name
 
-ช่วยลดความซ้ำซ้อนของโค้ด เพราะ ID และ Name ถูกกำหนดใน Person แล้ว
+ใช้ override กับเมทอด ToString() เพื่อกำหนดการแสดงผลของแต่ละคลาส
 
-## 3. Polymorphism (พหุนิยม)
+# 3. Polymorphism (พหุสัณฐาน)
 
-เมธอด ToString() ถูก Override ใน Student และ Teacher เพื่อให้แสดงผลข้อมูลที่แตกต่างกัน
+ใช้ abstract class Person และ abstract override string ToString() ทำให้คลาสลูก (Student และ Teacher) ต้องกำหนด ToString() ของตนเอง
 
-การใช้งาน List<Person> สามารถเก็บ Student และ Teacher ได้โดยใช้ Polymorphism
+สามารถใช้งาน Person ผ่าน Student และ Teacher ได้โดยไม่ต้องรู้โครงสร้างภายในของคลาสลูก
 
-## 4. Association (ความสัมพันธ์ระหว่างคลาส)
+# 4. Abstraction (นามธรรม)
 
-Teacher มีความสัมพันธ์กับ Student แบบ One-to-Many (1**:N****)** โดยใช้ List<Student>
+ใช้ abstract class Person เพื่อกำหนดโครงสร้างพื้นฐานให้ Student และ Teacher
 
-แสดงเป็น Association ใน Class Diagram (Teacher "1" o-- "*" Student)
+ทำให้คลาส Person ไม่สามารถถูกสร้างเป็น object ได้โดยตรง แต่ต้องสืบทอดไปใช้ในคลาสลูก
 
-สรุป
+## 3. สรุป
 
-โปรแกรมนี้ใช้แนวคิด OOP อย่างครบถ้วน ทั้ง Encapsulation, Inheritance, Polymorphism และ Association ซึ่งช่วยให้โค้ดมีความเป็นระเบียบ ดูแลง่าย และสามารถขยายฟังก์ชันเพิ่มเติมได้ในอนาคต
+โปรแกรมนี้ถูกออกแบบให้เป็นไปตามหลักการเขียนโปรแกรมเชิงวัตถุ (OOP) โดยใช้ Encapsulation, Inheritance, Polymorphism และ Abstraction เพื่อให้โค้ดมีโครงสร้างที่ดี เข้าใจง่าย และสามารถขยายต่อไปได้อย่างยืดหยุ่นในอนาคต
 
