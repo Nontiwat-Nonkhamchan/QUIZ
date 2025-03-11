@@ -5,7 +5,7 @@
 
 ## 1. Class Diagram
 ```mermaid
-tclassDiagram
+classDiagram
     class Person {
         ID: string
         Name: string
