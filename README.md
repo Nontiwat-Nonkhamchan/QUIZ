@@ -7,24 +7,24 @@
 ```mermaid
 tclassDiagram
     class Person {
-        - ID: string
-        - Name: string
-        + ToString(): string
+        ID: string
+        Name: string
+        ToString(): string
     }
     
     class Student {
-        - Major: string
-        - GPA: double
-        - AdvisorName: string
-        + ToString(): string
+        Major: string
+        GPA: double
+        AdvisorName: string
+        ToString(): string
     }
     
     class Teacher {
-        - Major: string
-        - advisees: List<Student>
-        + AddAdvisee(Student)
-        + GetAdvisees(): List<Student>
-        + ToString(): string
+        Major: string
+        advisees: List<Student>
+        AddAdvisee(Student)
+        GetAdvisees(): List<Student>
+        ToString(): string
     }
     
     Person <|-- Student
